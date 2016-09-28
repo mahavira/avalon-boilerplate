@@ -1,0 +1,27 @@
+{
+  "name": "webpack-express-boilerplate",
+  "description": "A boilerplate for running a Webpack workflow in Node express",
+  "main": "server.js",
+  "authors": [
+    "Christian Alfoni"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "express",
+    "webpack",
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "respond": "^1.4.2",
+    "html5shiv": "^3.7.3"
+  }
+}

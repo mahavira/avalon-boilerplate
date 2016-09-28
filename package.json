@@ -1,0 +1,59 @@
+{
+  "name": "webpack-express-boilerplate",
+  "version": "0.1.0",
+  "description": "A boilerplate for running a Webpack workflow in Node express",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christianalfoni/webpack-express-boilerplate.git"
+  },
+  "keywords": [
+    "express",
+    "webpack",
+    "node"
+  ],
+  "author": "Christian Alfoni",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/christianalfoni/webpack-express-boilerplate/issues"
+  },
+  "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
+  "scripts": {
+    "test": "",
+    "start": "node server",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "eslint": "eslint .",
+    "jscs": "jscs ."
+  },
+  "dependencies": {
+    "avalon2": "^2.1.15",
+    "glob": "^7.0.5",
+    "mmRequest": "^0.4.5",
+    "mmRouter": "^0.9.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.0.3",
+    "babel-loader": "^6.2.3",
+    "chai": "^3.2.0",
+    "cross-env": "^1.0.7",
+    "css-loader": "^0.19.0",
+    "eslint": "^1.5.0",
+    "express": "^4.13.3",
+    "extract-text-webpack-plugin": "^0.8.2",
+    "html-webpack-plugin": "^1.6.1",
+    "jscs": "^2.1.1",
+    "jsdom": "^6.5.1",
+    "json-loader": "^0.5.3",
+    "mocha": "^2.3.3",
+    "mocha-jsdom": "^1.0.0",
+    "postcss-loader": "^0.6.0",
+    "rimraf": "^2.4.3",
+    "sinon": "^1.16.1",
+    "sinon-chai": "^2.8.0",
+    "stats-webpack-plugin": "^0.2.1",
+    "style-loader": "^0.12.4",
+    "webpack": "^1.12.2",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
+  }
+}

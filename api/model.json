@@ -1,0 +1,56 @@
+[
+  {
+    "id":1,
+    "name": "会员属性扩展模型",
+    "code": "xxx",
+    "remark": "XXXXXXXXX",
+    "type": "XXX",
+    "pid": "1111",
+    "ptable": "XXX"
+  },
+  {
+    "id":2,
+    "name": "会员属性扩展模型",
+    "code": "xxx",
+    "remark": "XXXXXXXXX",
+    "type": "XXX",
+    "pid": "1111",
+    "ptable": "XXX"
+  },
+  {
+    "id":3,
+    "name": "会员属性扩展模型",
+    "code": "xxx",
+    "remark": "XXXXXXXXX",
+    "type": "XXX",
+    "pid": "1111",
+    "ptable": "XXX"
+  },
+  {
+    "id":4,
+    "name": "会员属性扩展模型",
+    "code": "xxx",
+    "remark": "XXXXXXXXX",
+    "type": "XXX",
+    "pid": "1111",
+    "ptable": "XXX"
+  },
+  {
+    "id":5,
+    "name": "会员属性扩展模型",
+    "code": "xxx",
+    "remark": "XXXXXXXXX",
+    "type": "XXX",
+    "pid": "1111",
+    "ptable": "XXX"
+  },
+  {
+    "id":6,
+    "name": "会员属性扩展模型",
+    "code": "xxx",
+    "remark": "XXXXXXXXX",
+    "type": "XXX",
+    "pid": "1111",
+    "ptable": "XXX"
+  }
+]
