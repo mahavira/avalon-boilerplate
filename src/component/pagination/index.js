@@ -33,7 +33,7 @@ avalon.component('ms-newpager', {
         onInit: function (e) {
             var cur = this.currentPage
             var match = /(?:#|\?)page\-(\d+)/.exec(location.href)
-
+             
             if (match && match[1]) {
                 var cur = ~~match[1]
                 if (cur < 0 || cur > this.totalPages) {
