@@ -3,13 +3,16 @@ require("./style.css");
 avalon.component('ms-newpager', {
     template: require('./temp.html'),
     defaults: {
-        getHref: function (href) {
-            return '#page-' + this.toPage(href)
+        getHref: function (a) {
+            return '#page-' + this.toPage(a)
         },
         getTitle: function (title) {
             return title
         },
-        rpage : /(?:#|\?)page\-(\d+)/,
+        isDisabled: function (name, page) {
+            return this.$buttons[name] = (this.currentPage === page)
+        },
+        $buttons: {},
         showPages: 5,
         pages: [],
         totalPages: 15,
@@ -18,32 +21,7 @@ avalon.component('ms-newpager', {
         prevText: '上一页',
         nextText: '下一页',
         lastText: '尾页',
-        onPageClick: avalon.noop,//让用户重写
-        cbProxy: function (e, p) {
-            if (this.$buttons[p] || p === this.currentPage) {
-                e.preventDefault()
-                return //disabled, active不会触发
-            }
-            var cur = this.toPage(p)
-            var obj = getPages.call(this, cur)
-            this.pages = obj.pages
-            this.currentPage = obj.currentPage
-            return this.onPageClick(e, p)
-        }, 
-        onInit: function (e) {
-            var cur = this.currentPage
-            var match = /(?:#|\?)page\-(\d+)/.exec(location.href)
-             
-            if (match && match[1]) {
-                var cur = ~~match[1]
-                if (cur < 0 || cur > this.totalPages) {
-                    cur = 1
-                }
-            }
-            var obj = getPages.call(this, cur)
-            this.pages = obj.pages
-            this.currentPage = obj.currentPage
-        },
+        onPageClick: avalon.noop,
         toPage: function (p) {
             var cur = this.currentPage
             var max = this.totalPages
@@ -59,10 +37,40 @@ avalon.component('ms-newpager', {
                 default:
                     return p
             }
+        }, 
+
+        cbProxy: function (e, p) {
+            if (this.$buttons[p] || p === this.currentPage) {
+                e.preventDefault()
+                return //disabled, active不会触发
+            }
+            var cur = this.toPage(p)
+            this.render(cur)
+            return this.onPageClick(e, p)
         },
-         isDisabled: function (name, page) {
-            return this.$buttons[name] = (this.currentPage === page)
-         }
+        render: function(cur){
+            var obj = getPages.call(this, cur)
+            this.pages = obj.pages
+            this.currentPage = obj.currentPage
+        },
+        rpage: /(?:#|\?)page\-(\d+)/,
+        onInit: function () {
+            var cur = this.currentPage
+            var match = this.rpage && location.href.match(this.rpage)
+            if (match && match[1]) {
+                var cur = ~~match[1]
+                if (cur < 0 || cur > this.totalPages) {
+                    cur = 1
+                }
+            }
+            var that = this
+            this.$watch('totalPages', function(){
+                setTimeout(function(){
+                    that.render(that.currentPage)
+                },4)
+            })
+            this.render(cur)
+        }
     }
 })
 function getPages(currentPage) {
