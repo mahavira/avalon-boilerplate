@@ -41,6 +41,7 @@ var vm = avalon.define({
     },
     delData:function(){
         var delArray = vm.getChecks();  
+    
         if(delArray.length === 0){
             //若未选中，弹出请选择要删除的数据的对话框
             console.log("请选择要删除的数据");
