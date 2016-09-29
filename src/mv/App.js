@@ -24,16 +24,13 @@ var vm = avalon.define({
   clickHandle: function (menu) {
     var id = avalon.router.getLastPath().split('/')[2];
     location.hash = "#!/" + menu.path + '/' + id;
-
-    this.currTemp = menu.temp;
     this.currPath = menu.path;
   },
-  currTemp: '',
   currPath: 'info',
   setCurrPath: function (path) {
     var pathRoot = path.split('/')[1];
     this.currPath = pathRoot;
-    this.currTemp = this.menus[pathRoot].temp;
   }
+  
 });
 module.exports = vm;

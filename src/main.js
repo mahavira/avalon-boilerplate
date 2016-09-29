@@ -7,6 +7,7 @@ require('mmRequest');
 //component
 require('./component/pager');
 require('./component/dialog');
+require('./component/pagination');
 
 //vm
 var vmApp = require('./mv/App.js');

@@ -60,7 +60,7 @@
           <a href="javascript:;" :click="@clickHandle(menu)">{{menu.name}}</a>
         </li>
       </ul>
-      <div :html="@currTemp"></div>
+      <div :for="menu in @menus" :if="menu.path==@currPath" :html="menu.temp"></div>
     </div>
   </div>
 
