@@ -1,55 +1,45 @@
 <div class="" style="margin-top: 20px;" :controller="data">
+  <div class="loading-wrap" ms-visible="@loadingWrapShow">数据加载中....</div>
   <p>
     <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> 添加数据</button>
     &nbsp;
-    <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></i> 修改数据</button>
+    <button type="button" class="btn btn-default" ms-click="@editData"><i class="glyphicon glyphicon-pencil"></i> 修改数据</button>
     &nbsp;
-    <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-trash"></i> 删除数据</button>
+    <button type="button" class="btn btn-default" ms-click="@delData"><i class="glyphicon glyphicon-trash"></i> 删除数据</button>
   </p>
 
   <form class="form-inline" role="form">
     查找字段
-    <select class="form-control">
-      <option>选项1</option>
-      <option>选项2</option>
-      <option>选项3</option>
-      <option>选项4</option>
-      <option>选项5</option>
+    <select class="form-control" ms-duplex="@selectedF">
+        <option  ms-for="el in @priceOptions" ms-attr="{value: el}">{{el}}</option>
     </select>
     &nbsp;
-    <select class="form-control">
-      <option>选项1</option>
-      <option>选项2</option>
-      <option>选项3</option>
-      <option>选项4</option>
-      <option>选项5</option>
+    <select class="form-control" ms-duplex="@selectedS">
+      <option  ms-for="el in @otherOptions" ms-attr="{value: el}">{{el}}</option>
     </select>
     &nbsp;
     <button type="submit" class="btn btn-default">搜索</button>
   </form>
-
-  <table class="table table-hover table-bordered" style="margin-top: 20px;">
+  <table  class="table table-hover table-bordered" style="margin-top: 20px;">
     <thead>
-    <tr>
-      <th><input type="checkbox"/></th>
-      <th>代码</th>
-      <th>名称</th>
-      <th>数据类型</th>
-      <th>控件类型</th>
-      <th>是否必填</th>
+    <tr>      
+      <th>序号</th>
+      <th><input type="checkbox" ms-duplex-checked="@chkAll" data-duplex-changed="@checkAll"/>全选</th>
+      <th>PKValue</th>
+      <th>价格</th>
+      <th>楼盘所在地区</th>
     </tr>
     </thead>
     <tbody>
-    <tr :for="item in @data">
-      <td><input type="checkbox"/></td>
-      <td>1</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>是</td>
+    <tr ms-for="($index, el) in @data">      
+      <td>{{$index+1}}</td>
+      <td><input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="@checkOne"/></td>
+      <td>{{el.PKValue}}</td>
+      <td>{{el.price}}</td>
+      <td>{{el.address}}</td>
     </tr>
 
     </tbody>
   </table>
-
+  <xmp ms-widget="{is:'ms-newpager'}"></xmp>
 </div>

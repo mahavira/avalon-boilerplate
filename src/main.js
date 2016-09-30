@@ -6,9 +6,12 @@ require('mmRequest');
 
 //component
 require('./component/pager');
+require('./component/cancelDialog');
 require('./component/dialog');
 require('./component/dropdown');
-require('./component/datepicker');
+require('./component/pagination');
+require('./component/spinner');
+
 
 //vm
 var vmApp = require('./App.js');
