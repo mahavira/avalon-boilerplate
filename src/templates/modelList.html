@@ -9,7 +9,7 @@
       <div class="btn-group btn-group-justified">
         <a type="button" class="btn btn-default" :click="@newModelDialog"><i class="glyphicon glyphicon-plus"></i> 新建</a>
         <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i> 类型新建</a>
-        <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> 删除</a>
+        <a type="button" class="btn btn-default" :click="@newCancelDialog"><i class="glyphicon glyphicon-remove"></i> 删除</a>
       </div>
 
       <div class="input-group" style="margin: 15px 0;">
@@ -20,10 +20,12 @@
       </div>
       <hr/>
       <div class="list-group">
-        <a :for="el in @data" href="javascript:;" :class="['list-group-item', (el.id==@id && 'active')]"
+        <a :for="el in @data" href="javascript:;"  :class="['list-group-item', (el.id==@id && 'active')]"
            :click="@clickHandle(el)">{{el.name}}</a>
       </div>
     </div>
+    <ms-spinner :widget="">ffdrgferg</ms-spinner>
+
   </div>
 
   <ms-dialog :widget="@newModelDialogConfig">
@@ -54,4 +56,7 @@
         </div>
       </form>
   </ms-dialog>
+    <ms-canceldialog :widget="@cancelDialogConfig">
+      <div class="" slot="content"></div>
+    </ms-canceldialog>
 </div>

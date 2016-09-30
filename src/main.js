@@ -6,7 +6,9 @@ require('mmRequest');
 
 //component
 require('./component/pager');
+require('./component/cancelDialog');
 require('./component/dialog');
+require('./component/spinner');
 
 //vm
 var vmApp = require('./mv/App.js');
