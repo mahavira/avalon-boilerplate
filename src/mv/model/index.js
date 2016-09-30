@@ -29,6 +29,26 @@ var vm = avalon.define({
   },
   openNewModelDialog: function () {
     vmNewModelDialog.open();
+  },
+  cancelDialogConfig:{
+    id: 'aaaa',
+    title: '',
+    show: false,
+    ok:function () {
+      var _data=vm.data;
+      for(var i in _data){
+        if(_data[i].id==vm.id){
+          vm.data.splice(i,1);
+        }
+      }
+      var path = location.hash.split('/')[1];
+      path = path || 'info';
+      location.hash = "#!/" + path + '/' + _data[0].id;
+    }
+  },
+
+  newCancelDialog:function(){
+    this.cancelDialogConfig.show=true;
   }
 });
 vm.init();
