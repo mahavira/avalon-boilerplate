@@ -1,0 +1,35 @@
+<div :controller="modelList">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">扩展模型列表</h3>
+    </div>
+    <div class="panel-body">
+
+      <div class="btn-group btn-group-justified">
+        <a type="button" class="btn btn-default" :click="@openNewModelDialog"><i class="glyphicon glyphicon-plus"></i>
+          新建</a>
+        <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i> 类似新建</a>
+        <a type="button" class="btn btn-default" :click="@newCancelDialog"><i class="glyphicon glyphicon-remove"></i> 删除</a>
+      </div>
+
+      <div class="input-group" style="margin: 15px 0;">
+        <input type="text" class="form-control" name="text"/>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">搜索</button>
+            </span>
+      </div>
+      <hr/>
+      <div class="list-group">
+        <a :for="el in @data" href="javascript:;" :class="['list-group-item', (el.id==@id && 'active')]"
+           :click="@clickHandle(el)">{{el.name}}</a>
+      </div>
+    </div>
+  </div>
+  <ms-canceldialog :widget="@cancelDialogConfig">
+    <div class="" slot="content"></div>
+  </ms-canceldialog>
+  <ms-dialog :widget="@config" :controller="newModelDialog">
+  </ms-dialog>
+
+</div>

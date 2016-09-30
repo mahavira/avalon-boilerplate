@@ -48,6 +48,7 @@
       </div>
     </div>
   </nav>
+  <ms-datepicker :widget="{id:'X'}"></ms-datepicker>
 
   <div class="row">
     <div class="col-sm-4">
@@ -56,7 +57,7 @@
 
     <div class="col-sm-8">
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" :for="menu in @menus" :class="(menu.path==@currPath && 'active')">
+        <li role="presentation" :for="menu in @menus" :class="( menu.path==@currPath && 'active')">
           <a href="javascript:;" :click="@clickHandle(menu)">{{menu.name}}</a>
         </li>
       </ul>

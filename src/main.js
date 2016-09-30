@@ -8,15 +8,17 @@ require('mmRequest');
 require('./component/pager');
 require('./component/cancelDialog');
 require('./component/dialog');
+require('./component/dropdown');
 require('./component/pagination');
 require('./component/spinner');
 
+
 //vm
-var vmApp = require('./mv/App.js');
-var vmModelList = require('./mv/ModelList.js');
-var mvData = require('./mv/Data');
-var mvInfo = require('./mv/Info');
-var mvField = require('./mv/Field');
+var vmApp = require('./App.js');
+var vmModelList = require('./mv/model');
+var mvData = require('./mv/data');
+var mvInfo = require('./mv/info');
+var mvField = require('./mv/field');
 
 //添加路由规则
 avalon.router.add("/info/:id", function setPath(id) {

@@ -16,7 +16,7 @@ var vm = avalon.define({
   },
   request: function () {
     avalon.ajax({
-      url: apiPath+'model.json',
+      url: apiPath + 'model.json',
       success: function (data, textStatus, XHR) {
         vm.data = data;
         if (!vm.id) {
@@ -27,13 +27,8 @@ var vm = avalon.define({
       }
     });
   },
-  newModelDialogConfig: {
-    id: 'XXXx',
-    title: '新建扩展模型',
-    show: false,
-    ok:function () {
-      alert(0)
-    }
+  openNewModelDialog: function () {
+    vmNewModelDialog.open();
   },
   cancelDialogConfig:{
     id: 'aaaa',
@@ -49,15 +44,42 @@ var vm = avalon.define({
       var path = location.hash.split('/')[1];
       path = path || 'info';
       location.hash = "#!/" + path + '/' + _data[0].id;
-    }      
+    }
   },
-  newModelDialog: function () {
-    this.newModelDialogConfig.show = true;
-  },
+
   newCancelDialog:function(){
     this.cancelDialogConfig.show=true;
   }
-
 });
 vm.init();
+
+
+var vmNewModelDialog = avalon.define({
+  $id: 'newModelDialog',
+  data: {
+    name: 'abd',
+    code: 'code',
+    remark: 'remark',
+    type: 'type'
+  },
+  config: {
+    id: 'XXXx',
+    title: '新建扩展模型',
+    show: false,
+    content: require('./newModel.html'),
+    ok: function () {
+      vmNewModelDialog.submit();
+    }
+  },
+  submit: function () {
+    this.hide()
+  },
+  hide: function () {
+    this.config.show = false;
+  },
+  open: function () {
+    this.config.show = true;
+  }
+});
+
 module.exports = vm;

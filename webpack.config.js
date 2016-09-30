@@ -26,7 +26,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist/'),
     filename: '[name].js',
-    publicPath: '/'
+    publicPath: '/',
+    chunkFilename: "[name].chunk.js"//给require.ensure用
   },
   plugins: [
     new HtmlWebpackPlugin(), // Generates default index.html
@@ -35,6 +36,7 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
+    new webpack.optimize.CommonsChunkPlugin('common.js'),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
