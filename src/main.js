@@ -8,6 +8,7 @@ require('mmRequest');
 require('./component/pager');
 require('./component/cancelDialog');
 require('./component/dialog');
+require('./component/pagination');
 require('./component/spinner');
 
 //vm
