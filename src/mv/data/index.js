@@ -3,14 +3,16 @@
  */
 
 var vm = avalon.define({
-  $id: 'field',
+  $id: 'data',
   data: [],
   request: function () {
     avalon.ajax({
-      url: apiPath+'field',
+      url: apiPath+'data',
       success: function (data, textStatus, XHR) {
+        vm.data = data;
       }
     });
   }
 });
+
 module.exports = vm;

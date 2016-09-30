@@ -3,12 +3,13 @@
  */
 
 var vm = avalon.define({
-  $id: 'data',
+  $id: 'field',
   data: [],
   request: function () {
     avalon.ajax({
-      url: apiPath+'data',
+      url: apiPath+'field',
       success: function (data, textStatus, XHR) {
+        vm.data = data;
       }
     });
   }

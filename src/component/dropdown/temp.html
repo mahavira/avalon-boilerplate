@@ -1,0 +1,9 @@
+<div :class="['btn-group','btn-group-block',(@open && 'open')]" :click="@stopPropagation">
+  <button type="button" class="btn btn-danger dropdown-toggle btn-block" data-toggle="dropdown" ms-attr="{disabled: @disabled}" :click="@toggle">
+    <span class="btn-group-text">{{@currText}}</span><span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu" role="menu">
+    <li :for="op in @data" :click="@handleSelect(op)" :class="@hasValue(op) && 'active'"><a href="javascript:;">{{op.label}}</a></li>
+  </ul>
+</div>

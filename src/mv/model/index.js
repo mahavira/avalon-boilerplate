@@ -16,7 +16,7 @@ var vm = avalon.define({
   },
   request: function () {
     avalon.ajax({
-      url: apiPath+'model.json',
+      url: apiPath + 'model.json',
       success: function (data, textStatus, XHR) {
         vm.data = data;
         if (!vm.id) {
@@ -27,18 +27,39 @@ var vm = avalon.define({
       }
     });
   },
-  newModelDialogConfig: {
+  openNewModelDialog: function () {
+    vmNewModelDialog.open();
+  }
+});
+vm.init();
+
+
+var vmNewModelDialog = avalon.define({
+  $id: 'newModelDialog',
+  data: {
+    name: 'abd',
+    code: 'code',
+    remark: 'remark',
+    type: 'type'
+  },
+  config: {
     id: 'XXXx',
     title: '新建扩展模型',
     show: false,
-    ok:function () {
-      alert(0)
+    content: require('./newModel.html'),
+    ok: function () {
+      vmNewModelDialog.submit();
     }
   },
-  newModelDialog: function () {
-    this.newModelDialogConfig.show = true;
+  submit: function () {
+    this.hide()
+  },
+  hide: function () {
+    this.config.show = false;
+  },
+  open: function () {
+    this.config.show = true;
   }
-
 });
-vm.init();
+
 module.exports = vm;
