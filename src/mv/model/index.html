@@ -10,7 +10,7 @@
         <a type="button" class="btn btn-default" :click="@openNewModelDialog"><i class="glyphicon glyphicon-plus"></i>
           新建</a>
         <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i> 类似新建</a>
-        <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i> 删除</a>
+        <a type="button" class="btn btn-default" :click="@newCancelDialog"><i class="glyphicon glyphicon-remove"></i> 删除</a>
       </div>
 
       <div class="input-group" style="margin: 15px 0;">
@@ -26,7 +26,9 @@
       </div>
     </div>
   </div>
-
+  <ms-canceldialog :widget="@cancelDialogConfig">
+    <div class="" slot="content"></div>
+  </ms-canceldialog>
   <ms-dialog :widget="@config" :controller="newModelDialog">
   </ms-dialog>
 
