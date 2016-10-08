@@ -59,7 +59,6 @@ var vm = avalon.define({
 });
 vm.init();
 
-
 var vmNewModelDialog = avalon.define({
   $id: 'newModelDialog',
   data: {
