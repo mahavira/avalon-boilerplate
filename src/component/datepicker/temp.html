@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="dateWrap">
+    <div class="dateHead" :click="@open">
+        <input type="text" :duplex="@val" :keyup="@valideHandle" />
+        <div class="pull-right point">
+            <span class="" :text="@Isvalid?'今天':'格式错误'"></span><i class="glyphicon glyphicon-calendar"></i>
+        </div>
 
-</body>
-</html>
+    </div>
+    <div class="dateBody" :css="{display:@show?'block':'none'}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="title" colspan="7">请选择日期</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="glyphicon glyphicon-chevron-left" :click="@monMinus"></td>
+                <td class="yearAndMonth" colspan="5" :text="@yearAndMonth">2016-10</td>
+                <td class="glyphicon glyphicon-chevron-right" :click="@monAdd"></td>
+            </tr>
+            <tr class="week">
+                <td>日</td>
+                <td>一</td>
+                <td>二</td>
+                <td>三</td>
+                <td>四</td>
+                <td>五</td>
+                <td>六</td>
+            </tr>
+            </tbody>
+            <tfoot id="tfoot">
+            </tfoot>
+        </table>
+    </div>
+</div>

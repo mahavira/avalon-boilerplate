@@ -49,6 +49,12 @@ var vm = avalon.define({
 
   newCancelDialog:function(){
     this.cancelDialogConfig.show=true;
+  },
+  spinnerConfig:{
+    id: 'bbb'
+  },
+  datepickerConfig:{
+    id:'ccc'
   }
 });
 vm.init();
