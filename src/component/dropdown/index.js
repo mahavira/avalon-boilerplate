@@ -20,8 +20,7 @@ avalon.component('ms-dropdown', {
       }.bind(this));
     },
     onReady: function () {
-      if (Object.prototype.toString.call(this.currValue) !== '[object Array]')
-        this.currValue = [this.currValue];
+      this.setCurrValueToArray();
       this.setCurrText();
       log('onReady')
     },
@@ -33,6 +32,7 @@ avalon.component('ms-dropdown', {
       this.currText = labels.length ? labels.join(',') : this.defaultText;
     },
     hasValue: function (op) {
+        this.setCurrValueToArray()
       return this.currValue.indexOf(op.value) >= 0;
     },
     toggle: function (e) {
@@ -40,6 +40,7 @@ avalon.component('ms-dropdown', {
       this.stopPropagation(e);
     },
     handleSelect: function (op) {
+        this.setCurrValueToArray()
       if (!this.multiple) {
         if (!this.currValue.length)
           this.currValue.push(op.value);
@@ -57,6 +58,11 @@ avalon.component('ms-dropdown', {
       if (Object.prototype.toString.call(this.onSelect) === '[object Function]')
         this.onSelect(this.currValue);
     },
+  setCurrValueToArray:function(){
+      if (Object.prototype.toString.call(this.currValue) !== '[object Array]')
+        this.currValue = [this.currValue];
+
+  },
     stopPropagation: function (e) {
       if (e && e.stopPropagation) {
         e.stopPropagation();
