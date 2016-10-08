@@ -25,6 +25,8 @@
            :click="@clickHandle(el)">{{el.name}}</a>
       </div>
     </div>
+    <ms-spinner :widget="@spinnerConfig"></ms-spinner>
+    <ms-datepicker :widget="@datepickerConfig"></ms-datepicker>
   </div>
   <ms-canceldialog :widget="@cancelDialogConfig">
     <div class="" slot="content"></div>

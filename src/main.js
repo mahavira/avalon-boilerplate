@@ -11,6 +11,7 @@ require('./component/dialog');
 require('./component/dropdown');
 require('./component/pagination');
 require('./component/spinner');
+require('./component/datepicker');
 
 
 //vm
