@@ -1,0 +1,96 @@
+<form class="form-horizontal" role="form" ms-validate="@validate">
+  <div class="row">
+      <div class="col-sm-6 clearfix">
+         
+          <h3>基本信息</h3>
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">名称：</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ms-duplex="@basicInfo.name"
+                     ms-rules="{ required: true,maxlength:10 }"
+                     data-required-message="请输入名称"
+                     data-maxlength-message="密码长度不能小于 10 个字母"/>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">代码：</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ms-duplex="@basicInfo.code"/>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">字段分组：</label>
+            <div class="col-sm-9">
+              <ms-dropdown ms-widget="@fieldGroup"></ms-dropdown>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">控件类型：</label>
+            <div class="col-sm-9">
+              <ms-dropdown ms-widget="@controlType"></ms-dropdown>
+            </div>
+          </div> 
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">数据类型：</label>
+            <div class="col-sm-9">
+              <ms-dropdown ms-widget="@dataType"></ms-dropdown>
+            </div>
+          </div> 
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">是否必填：</label>
+            <div class="col-sm-9">
+              <input type="radio" value="1"  ms-duplex="@basicInfo.isRequired"/>是
+              <input type="radio" value="0"  ms-duplex="@basicInfo.isRequired"/>否
+            </div>
+          </div> 
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">默认值：</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ms-duplex="@basicInfo.default"/>
+            </div>
+          </div> 
+          
+      </div>
+      <div class="col-sm-6 ">                   
+          <h3>界面属性</h3>          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">选项列表：</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ms-duplex="@interfaceAttr.list"/>
+            </div>
+            <button type="button" class="btn btn-default" ms-click="@setList">设置...</button>
+          </div> 
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">校验规则：</label>
+            <div class="col-sm-6">
+              <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule"/>
+            </div>
+            <button type="button" class="btn btn-default" ms-click="@setRules">设置...</button>
+          </div> 
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">检验条件：</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ms-duplex="@interfaceAttr.conditions"/>
+            </div>
+          </div> 
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">说明文本：</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ms-duplex="@interfaceAttr.text"/>
+            </div>
+          </div>           
+      </div>      
+  </div>  
+</form>
+<ms-dialog :widget="@config" :controller="setListDialog"></ms-dialog>
+<ms-dialog :widget="@config" :controller="setRulesDialog"></ms-dialog>

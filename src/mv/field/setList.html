@@ -1,0 +1,25 @@
+<form class="form-horizontal" role="form"> 
+    <div class="form-group">
+        <label class="col-sm-3 control-label">选项数据来源：</label>
+        <div class="col-sm-9">
+          <input type="radio" value="0"  ms-duplex="@fieldList.getMethod"/>从系统代码中选择
+          <input type="radio" value="1"  ms-duplex="@fieldList.getMethod"/>手工输入
+          <input type="radio" value="2"  ms-duplex="@fieldList.getMethod"/>从后台方法
+        </div>
+      </div> 
+       <div class="form-group" :visible="@fieldList.getMethod === '0'">
+        <div class="col-sm-6 col-sm-offset-3">
+           <ms-dropdown ms-widget="@sysCode"></ms-dropdown>
+        </div>
+       </div> 
+       <div class="form-group" :visible="@fieldList.getMethod === '1'">
+        <div class="col-sm-6 col-sm-offset-3">
+          <textarea class="form-control" rows="3" ms-duplex="@fieldList.sysList1"></textarea>
+        </div>
+       </div> 
+       <div class="form-group" :visible="@fieldList.getMethod === '2'">
+        <div class="col-sm-6 col-sm-offset-3">
+           <input type="text" class="form-control" ms-duplex="@fieldList.sysList2"/>
+        </div>
+       </div> 
+</form>

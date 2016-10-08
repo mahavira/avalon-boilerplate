@@ -1,0 +1,83 @@
+
+    <form class="form-horizontal" role="form"> 
+
+    <div class="row">
+      <div class="col-sm-12">
+     <h4>一般校验规则：</h4>
+     <div class="form-group">
+        <div class="col-sm-6">
+          <input type="checkbox" value="0" ms-duplex="@commonRulesA"  data-duplex-changed="@getCommonRules"/>不能为空      
+        </div>
+        <div class="col-sm-6">            
+          <input type="checkbox" value="1" ms-duplex="@commonRulesA"  data-duplex-changed="@getCommonRules"/>数字（整数或小数）
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+           <input type="checkbox" value="2" ms-duplex="@commonRulesA"  data-duplex-changed="@getCommonRules"/>整数           
+        </div>
+        <div class="col-sm-6">
+            <input type="checkbox" value="3" ms-duplex="@commonRulesA"  data-duplex-changed="@getCommonRules"/>时间（HH-mm-ss）（yyyy-MM-dd）
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+            <input type="checkbox" value="4" ms-duplex="@commonRulesA"  data-duplex-changed="@getCommonRules"/>日期（yyyy-MM-dd）
+        </div>
+        <div class="col-sm-6">
+            <input type="checkbox" value="5" ms-duplex="@commonRulesA"  data-duplex-changed="@getCommonRules"/>日期时间（yyyy-MM-dd HH-mm-ss）（yyyy-MM-dd）
+        </div>
+    </div> 
+    <h4>一般校验规则：</h4>
+     <div class="form-group">
+        <div class="col-sm-6">
+          <input type="checkbox" value="0" ms-duplex="@commonRulesB"/>Email      
+        </div>
+        <div class="col-sm-6">            
+          <input type="checkbox" value="1" ms-duplex="@commonRulesB"/>邮政编码（中国）   
+        </div>
+     </div>
+     <div class="form-group">
+        <div class="col-sm-6">
+           <input type="checkbox" value="2" ms-duplex="@commonRulesB"/>固定电话号码（中国）           
+        </div>
+        <div class="col-sm-6">
+            <input type="checkbox" value="3" ms-duplex="@commonRulesB"/>移动电话号码（中国）
+        </div>
+     </div>
+     <div class="form-group">
+        <div class="col-sm-6">
+            <input type="checkbox" value="4" ms-duplex="@commonRulesB"/>固定或移动电话（中国）
+        </div>
+        <div class="col-sm-6">
+            <input type="checkbox" value="5" ms-duplex="@commonRulesB"/>身份证号码（中国）
+        </div>
+      </div>
+      <h4>高级校验规则：</h4>
+     <div class="form-group">
+        <div class="col-sm-5">
+          <input type="checkbox" value="0" ms-duplex="@advanceRules"/>javascript脚本    
+        </div>
+        <div class="col-sm-7">            
+          <input type="text" class="form-control" ms-duplex="@js"/>   
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-5">
+          <input type="checkbox" value="0" ms-duplex="@advanceRules"/>正则表达式    
+        </div>
+        <div class="col-sm-7">            
+          <input type="text" class="form-control" ms-duplex="@reg"/>   
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-5">
+          <input type="checkbox" value="0" ms-duplex="@advanceRules"/>长度    
+        </div>
+        <div class="col-sm-7">            
+          <input type="text" class="form-control" ms-duplex="@length"/>   
+        </div>
+      </div>      
+    </div>
+</div>
+</form>
