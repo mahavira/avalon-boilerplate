@@ -32,6 +32,9 @@ var vm = avalon.define({
             })
         }
     },
+    addData:function(e){
+        vmCreateDataDialog.open();
+    },
     getChecks:function(){
         var tmpArray = [];        
         avalon.each(vm.data, function(index, el){
@@ -88,5 +91,36 @@ var vm = avalon.define({
     priceOptions:['选项1','选项2','选项3','选项4'],
     otherOptions:['选项1','选项2','选项3','选项4']     
 });
-
+var vmCreateDataDialog = avalon.define({
+    $id:"createDataDialog",
+    config: {
+        id: 'createData',
+        title: '新建数据',
+        show: false,
+        content: require('./createData.html'),
+        ok: function () {
+            vmCreateDataDialog.submit();
+        }
+    },
+    dataInfo:{
+        info:"",
+        price:"",
+        position:""
+    },
+    submit: function () {
+        this.hide()
+    },
+    hide: function () {
+        this.config.show = false;
+    },
+    open: function () {
+        this.config.show = true;
+    },
+    setList:function(){
+        vmsetListDialog.open();
+    },
+    setRules:function(){
+        vmsetRulesDialog.open();
+    }
+});
 module.exports = vm;

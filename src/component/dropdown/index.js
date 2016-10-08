@@ -13,7 +13,7 @@ avalon.component('ms-dropdown', {
     data: [],
     open: false,
     disabled: false,
-    multiple: true,
+    multiple: false,
     onInit: function () {
       document.addEventListener('click',function () {
         this.open = false;
