@@ -182,6 +182,7 @@ var vmsetListDialog = avalon.define({
       mWidth:"600",
       content: require('./setList.html'),
       ok: function () {
+         
         vmsetListDialog.submit();
       }
     },
@@ -213,9 +214,18 @@ var vmsetRulesDialog = avalon.define({
       title: '校验规则',
       show: false,
       content: require('./setRules.html'),
-      ok: function () {
+      ok: function () {            
         vmsetRulesDialog.submit();
       }
+    },
+    commonRulesA:[],
+    commonRulesB:[],
+    advanceRules:[],
+    js:"",
+    reg:"",
+    length:"",
+    getCommonRules:function(){
+        console.log(vmsetRulesDialog.commonRulesA.sort().join(";"));
     },
     hide: function () {
       this.config.show = false;
