@@ -224,4 +224,5 @@ var vmsetRulesDialog = avalon.define({
       this.config.show = true;
     }
 });
+
 module.exports = vm;
