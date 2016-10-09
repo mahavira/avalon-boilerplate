@@ -110,6 +110,7 @@ var vmAddFieldDialog = avalon.define({
     id: 'addfield',
     title: '添加字段',
     show: false,
+    showFooter:false,
     mWidth:"1000",
     content: require('./addField.html'),
     ok: function () {
@@ -137,6 +138,9 @@ var vmAddFieldDialog = avalon.define({
         vmAddFieldDialog.basicInfo.dType = v;
      }
   },
+  cancelHandle:function(){
+    vmAddFieldDialog.submit();
+  },
   submit: function () {
     this.hide()
   },
@@ -152,8 +156,7 @@ var vmAddFieldDialog = avalon.define({
   setRules:function(){
       vmsetRulesDialog.open();
   },
-    validate: {
-        validateAllInSubmit: false,
+  validate: {
         onSuccess: function(reasons, event) {
             console.info('OK')
         },
@@ -166,7 +169,8 @@ var vmAddFieldDialog = avalon.define({
             if (reasons.length) {
                 console.log('有表单没有通过')
             } else {
-                console.log('全部通过')
+                console.log('全部通过');
+                vmAddFieldDialog.submit();
             }
         }
 
@@ -178,7 +182,7 @@ var vmsetListDialog = avalon.define({
     config: {
       id: 'setlist',
       title: '字段选项',
-      show: false,
+      show: false,      
       mWidth:"600",
       content: require('./setList.html'),
       ok: function () {

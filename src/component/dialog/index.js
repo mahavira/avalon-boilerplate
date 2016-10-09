@@ -8,6 +8,7 @@ avalon.component('ms-dialog', {
     title: '提示',
     content: "",
     show:false,
+    showFooter:true,
     mWidth:'600',
     onCLose:function () {
       log(this)
