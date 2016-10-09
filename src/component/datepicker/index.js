@@ -84,8 +84,6 @@ avalon.component('ms-datepicker',{
             var timeFormate=ynow+'-'+(mnow<10?"0"+mnow:mnow)+'-'+(dnow<10?"0"+dnow:dnow);
             this.val=timeFormate;
         },
-        max:2020,
-        min:1900,
         chooseHandle:function(){
             this.show=false;
         },
