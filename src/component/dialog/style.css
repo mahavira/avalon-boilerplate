@@ -1,3 +1,9 @@
 .modal.in .modal-dialog {
   z-index: 1041;
 }
+.form-group:last-of-type{
+  margin-right: -15px;
+}
+.modal{
+    overflow: initial;
+}

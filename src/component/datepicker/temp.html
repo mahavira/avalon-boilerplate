@@ -1,72 +1,37 @@
-<div class="form-group has-feedback" :click="@onStopPropagation">
-  <input type="text" class="form-control" :focus="@onFocus" ms-duplex="@currDate.date">
-  <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
 
-  <div class="datepicker" :visible="@show">
-    <div class="btn-group btn-group-justified">
-      <div class="btn-group">
-        <button type="button" class="btn btn-default" :click="@byStep(-12)" ms-attr="{disabled: @currShowType!=@DAY}"><i
-            class="glyphicon glyphicon-step-backward"></i></button>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default" :click="@byStep(-1)" ms-attr="{disabled: @currShowType==@MONTH}">
-          <i
-              class="glyphicon glyphicon-chevron-left"></i></button>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default" :click="@changeShowType">{{ @currDate.year}}-{{ @currDate.month
-          +1}}-{{
-          @currDate.day}}
-        </button>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default" :click="@byStep(1)" ms-attr="{disabled: @currShowType==@MONTH}"><i
-            class="glyphicon glyphicon-chevron-right"></i></button>
-      </div>
-      <div class="btn-group">
-        <button type="button" class="btn btn-default" :click="@byStep(12)" ms-attr="{disabled: @currShowType!=@DAY}"><i
-            class="glyphicon glyphicon-step-forward"></i></button>
-      </div>
+<div class="dateWrap">
+    <div class="dateHead" :click="@open">
+        <input type="text" :duplex="@val" :keyup="@valideHandle" />
+        <div class="pull-right point">
+            <span class="" :text="@Isvalid?'今天':'格式错误'"></span><i class="glyphicon glyphicon-calendar"></i>
+        </div>
+
     </div>
-    <br>
-
-    <!--日选择-->
-    <table class="table table-bordered" ms-if="@isYMD(@DAY)">
-      <thead>
-      <tr>
-        <th ms-for="d in @l.weekDayNames">{{d}}</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr :for="(rowIndex,r) in [0,0,0,0,0,0]">
-        <td :for="(colIndex,c) in @l.weekDayNames" :click="@clickYMD(@DAY,rowIndex,colIndex)"
-            :class="[@isToDay(rowIndex,colIndex)&&'today',@isCurrDay(rowIndex,colIndex)&&'active']">
-          {{@getDay(rowIndex,colIndex)}}
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <!--月份选择-->
-    <table class="table table-bordered" ms-visible="@isYMD(@MONTH)">
-      <tbody>
-      <tr :for="(rowIndex,r) in [0,0,0,0,0,0]">
-        <td :for="(colIndex,d) in [0,0]" :click="@clickYMD(@MONTH,rowIndex,colIndex)">
-          {{@l.monthNames[colIndex+rowIndex*2]}}
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-    <!--年份选择-->
-    <table class="table table-bordered" ms-visible="@isYMD(@YEAR)">
-      <tbody>
-      <tr :for="(rowIndex,r) in [0,0,0,0,0,0]">
-        <td :for="(colIndex,d) in [0,0,0]" :click="@clickYMD(@YEAR,rowIndex,colIndex)">
-          {{@getYear(rowIndex,colIndex)+@l.yearText}}
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="dateBody" :css="{display:@show?'block':'none'}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="title" colspan="7">请选择日期</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="glyphicon glyphicon-chevron-left" :click="@monMinus"></td>
+                <td class="yearAndMonth" colspan="5" :text="@yearAndMonth">2016-10</td>
+                <td class="glyphicon glyphicon-chevron-right" :click="@monAdd"></td>
+            </tr>
+            <tr class="week">
+                <td>日</td>
+                <td>一</td>
+                <td>二</td>
+                <td>三</td>
+                <td>四</td>
+                <td>五</td>
+                <td>六</td>
+            </tr>
+            </tbody>
+            <tfoot id="tfoot">
+            </tfoot>
+        </table>
+    </div>
 </div>

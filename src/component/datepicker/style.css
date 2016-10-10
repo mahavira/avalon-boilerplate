@@ -1,34 +1,45 @@
-.datepicker{
-  position: absolute;
-  right: 0;
-  top: 38px;
-  background: #FFF;
-  max-width: 320px;
-  z-index: 1;
+
+@charset"utf-8";
+.dateWrap{
+    width:230px;
 }
-.datepicker .btn-group-justified>.btn-group .btn{
-  border-right-width: 0;
+.dateHead{
+    border:1px solid #eee;
+    height: 35px;
+    padding-top:5px;
+    padding-left:5px;
 }
-.datepicker .btn-group-justified>.btn-group:last-of-type .btn{
-  border-right-width: 1px;
+.dateHead input{
+    border:0;
+    width:65%;
 }
-.datepicker .table>tbody>tr>td,
-.datepicker .table>tbody>tr>th,
-.datepicker .table>tfoot>tr>td,
-.datepicker .table>tfoot>tr>th,
-.datepicker .table>thead>tr>td,
-.datepicker .table>thead>tr>th{
-  height: 38px;
-  text-align: center;
+.dateHead input:focus{
+    outline: 0;
 }
-.datepicker .table>tbody>tr>td{
-  cursor: pointer;
+.title{
+    text-align: center;
 }
-.datepicker .table>tbody>tr>td.today{
-  background: #4cae4c;
-  color: #FFF;
+.yearAndMonth{
+    text-align: center;
 }
-.datepicker .table>tbody>tr>td.active{
-  background: #d43f3a;
-  color: #FFF;
+.table>tbody>tr>td,.table>tfoot>tr>td{
+    border-top:0;
 }
+thead,tbody,tfoot{
+    border-left:1px solid #eee;
+    border-right:1px solid #eee;
+}
+.table{
+    border: 1px solid #eee;
+}
+.dateBody{
+    display: none;
+    box-shadow: 5px 5px 6px #D7D3D3;
+}
+.point{
+    margin-right:6px;
+}
+.today{
+    color: #fff;
+}
+

@@ -1,7 +1,7 @@
 <div class="" style="margin-top: 20px;" :controller="data">
   <div class="loading-wrap" ms-visible="@loadingWrapShow">数据加载中....</div>
   <p>
-    <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-plus-sign"></i> 添加数据</button>
+    <button type="button" class="btn btn-default" ms-click="@addData"><i class="glyphicon glyphicon-plus-sign"></i> 添加数据</button>
     &nbsp;
     <button type="button" class="btn btn-default" ms-click="@editData"><i class="glyphicon glyphicon-pencil"></i> 修改数据</button>
     &nbsp;
@@ -38,8 +38,9 @@
       <td>{{el.price}}</td>
       <td>{{el.address}}</td>
     </tr>
-
     </tbody>
   </table>
-  <xmp ms-widget="{id:'aXS',is:'ms-newpager'}"></xmp>
+
+  <ms-dialog :widget="@config" :controller="createDataDialog"></ms-dialog>
+  <xmp ms-widget="{is:'ms-newpager'}"></xmp>
 </div>

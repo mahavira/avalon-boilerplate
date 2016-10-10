@@ -1,174 +1,127 @@
-'use strict';
-require("./style.css");
-/**
- * 是否闰年
- */
-function isLeapYear(year) {
-  return (year % 100 == 0 ? (year % 400 == 0 ? 1 : 0) : (year % 4 == 0 ? 1 : 0));
-}
-/**
- * 常规月份中的天数
- * @type {Array}
- */
-var monthDays = [31, 28, 31, 30, 31, 31, 30, 31, 30, 31, 30, 31];
 
 /**
- * 当前显示类型,按日\月\年显示,
- * @type {string}
+ * Created by ff on 2016/9/30.
  */
-const YEAR = 'YEAR';
-const MONTH = 'MONTH';
-const DAY = 'DAY';
-/**
- * 按日
- */
-function getDate(y, m, d) {
-  var date = new Date(y, m, d);
-  var year = date.getFullYear();
-  var month = date.getMonth();
-  var day = date.getDate();
-  var maxDay = monthDays[month];
-  //如等于二月份
-  if (month == 1)
-    maxDay += isLeapYear(year);
-  var firstDay = (new Date(year, month, 1)).getDay();//当月第一天星期几
-  return {
-    date, year, month, day, firstDay, maxDay
-  }
-}
-avalon.component('ms-datepicker', {
-  template: require('./temp.html'),
-  defaults: {
-    l: require('./lang-zh-cn'),
-    currShowType: DAY,
-    YEAR, MONTH, DAY,
-    currDate: {},
-    show:false,
-    onInit: function () {
-      var dt = new Date('2016-10-31');
-      this.currDate = getDate(dt.getFullYear(), dt.getMonth(), dt.getDate());
+require('./style.css');
+import $ from '../../../bower_components/jquery/dist/jquery';
+avalon.component('ms-datepicker',{
+    template:require('./temp.html'),
+    defaults:{
+        show:false,
+        Isvalid:true,
+        val:'',
+        init:function(){
+            //var nstr=new Date(); //当前Date
+            var nstr=new Date(this.yearAndMonth+'-01'); //当前Date
+            var ynow=nstr.getFullYear(); //年份
+            var mnow=nstr.getMonth(); //月份
+            //var dnow=nstr.getDate(); //今日日期
+            var dnow=this.val.substring(8,10);
+            var n1str=new Date(ynow,mnow,1); //当月第一天Date
+            var firstday=n1str.getDay(); //当月第一天星期几
+            function is_leap(year){//是否为闰年
+                return (year%100==0?(year%400==0?1:0):(year%4==0?1:0));
+            }
+            var sep=is_leap(ynow)+28;
+            var m_days=new Array(31,sep,31,30,31,30,31,31,30,31,30,31); //各月份的总天数
+            var tr_str=Math.ceil((m_days[mnow] + firstday)/7); //表格所需要行数
+            var htm='';
 
-      document.addEventListener('click',function () {
-        this.show = false;
-      }.bind(this));
+            for(var i=0;i<tr_str;i++) { //表格的行
+                htm+="<tr>";
+                for(var k=0;k<7;k++) { //表格每行的单元格
+                    var idx=i*7+k; //单元格自然序列号
+                    var date_str=idx-firstday+1; //计算日期
+                    (date_str<=0 || date_str>m_days[mnow]) ? date_str="&nbsp;" : date_str=idx-firstday+1; //过滤无效日期（小于等于零的、大于月总天数的）
+                    //打印日期：今天底色为蓝
+                    date_str==dnow ? htm+= "<td align='center' bgcolor='#31C5F1' font-color='white'>" + date_str + "</td>" :htm+= "<td align='center'>" + date_str + "</td>";
+                }
+                htm+="</tr>"; //表格的行结束
+            }
 
-    },
-    onFocus:function () {
-      this.show= true;
-    },
-    /**
-     * 前进后退月份
-     * @param mStep number
-     */
-    byStep: function (mStep) {
-      var year = this.currDate.year;
-      var month = this.currDate.month;
-      var day = this.currDate.day;
+            $('tfoot').empty().append(htm); //表格结束
+            var self=this;
+            function chooseHandle(el){
+                var $el=$(el);
+                var nday=$el.text();
+                console.log(nday)
+                if(nday==' '){
+                    return false;
+                }else{
+                    self.val=self.yearAndMonth+'-'+(nday<10?"0"+nday:nday);
+                    self.show=false;
+                }
 
-      if (this.currShowType == DAY) {
-        month += mStep;
+            }
+            $('tfoot td').click(function(){
+                chooseHandle(this);
+            })
+        },
+        onInit: function () {
+            this.turnHandle();
+        },
+        open:function(){
+            this.show=true;
+            this.turnHandle();
+            this.yearAndMonthShow();
+            this.init();
+        },
+        valideHandle:function(){
+            var reg=/^([1-9][0-9]{3})-(0\d{1}|1[0-2])-(0\d{1}|1\d{1}|2\d{1}|3[0-1])$/;
+            if(!reg.test(this.val)){
+                this.Isvalid=false;
+            }else{
+                this.Isvalid=true;
+                this.yearAndMonthShow();
+                this.init();
+            }
 
-        year = year + Math.floor(month / 12);
-        if (month > 11) {
-          month = month % 12;
-        } else if (month < 0) {
-          month = 12 - Math.abs(month % 12);
+        },
+        turnHandle:function(){
+            var taday=new Date();
+            var ynow=taday.getFullYear(); //年份
+            var mnow=taday.getMonth()+1; //月份
+            var dnow=taday.getDate(); //今日日期
+            var timeFormate=ynow+'-'+(mnow<10?"0"+mnow:mnow)+'-'+(dnow<10?"0"+dnow:dnow);
+            this.val=timeFormate;
+        },
+        chooseHandle:function(){
+            this.show=false;
+        },
+        yearAndMonth:'',
+        yearAndMonthShow:function(){
+            this.yearAndMonth=(this.val).substring(0,7);
+        },
+        monMinus:function(){
+            var nyear=this.yearAndMonth.substring(0,4);
+            var nmon=this.yearAndMonth.substring(5,7);
+            nmon=parseInt(nmon);
+            if(nmon>1){
+                nmon--;
+            }else{
+                nmon=12;
+                nyear--;
+            }
+            nmon<10?nmon="0"+nmon:nmon=nmon;
+            var newyearAndMonth=nyear+'-'+nmon;
+            this.yearAndMonth=newyearAndMonth;
+            this.init();
+        },
+        monAdd:function(){
+            var nyear=this.yearAndMonth.substring(0,4);
+            var nmon=this.yearAndMonth.substring(5,7);
+            nmon=parseInt(nmon);
+            if(nmon>11){
+                nmon=1;
+                nyear++;
+            }else{
+                nmon++;
+            }
+            nmon<10?nmon="0"+nmon:nmon=nmon;
+            var newyearAndMonth=nyear+'-'+nmon;
+            this.yearAndMonth=newyearAndMonth;
+            this.init();
+
         }
-
-        var maxDay = monthDays[month] + (month == 1 ? isLeapYear(year) : 0);
-        if (day > maxDay)
-          day = maxDay;
-
-        this.currDate = getDate(year, month, day);
-      } else {
-
-        var num = 3 * 6;
-        switch (mStep) {
-          case 1:
-            year += num;
-            break;
-          case -1:
-            year -= num;
-        }
-
-        this.currDate = getDate(year, month, day);
-      }
-    },
-    /**
-     * 如索引小于等于当月第一天的星期几或大于等于当前最后一天则返回空
-     * @param rowIndex 表格索引行
-     * @param colIndex 表格索引列
-     * @returns number|undefined
-     */
-    getDay: function (rowIndex, colIndex) {
-      var n = colIndex + 1 + rowIndex * 7;
-      if (n <= this.currDate.firstDay)
-        return;
-      if (n > this.currDate.maxDay + this.currDate.firstDay)
-        return;
-      return n - this.currDate.firstDay;
-    },
-    getMonth: function (rowIndex, colIndex) {
-      return colIndex + rowIndex * 2;
-    },
-    getYear: function (rowIndex, colIndex) {
-      return this.currDate.year + (colIndex + rowIndex * 3) - 10;
-    },
-
-    isToDay: function (rowIndex, colIndex) {
-      var now = new Date();
-      var curr = this.currDate;
-
-      if (this.getDay(rowIndex, colIndex) == now.getDate()
-        && curr.month == now.getMonth()
-        && curr.year == now.getFullYear())
-        return true;
-
-      return false;
-    },
-    isCurrDay: function (rowIndex, colIndex) {
-      var curr = this.currDate;
-      if (this.getDay(rowIndex, colIndex) == curr.day)
-        return true;
-
-      return false;
-    },
-
-    changeShowType: function () {
-      this.currShowType = (this.currShowType == DAY ? MONTH : YEAR);
-    },
-    isYMD: function (v) {
-      return v == this.currShowType;
-    },
-    clickYMD: function (type, rowIndex, colIndex) {
-      var year = this.currDate.year,
-        month = this.currDate.month,
-        day = this.currDate.day;
-
-      switch (type) {
-        case DAY:
-          var _day = this.getDay(rowIndex, colIndex);
-          if (day)
-            day = _day;
-          break;
-        case MONTH:
-          month = this.getMonth(rowIndex, colIndex);
-          this.currShowType = DAY;
-          break;
-        case YEAR:
-          year = this.getYear(rowIndex, colIndex);
-          this.currShowType = MONTH;
-          break;
-      }
-      this.currDate = getDate(year, month, day);
-      this.show=false;
-    },
-    onStopPropagation: function (e) {
-      if (e && e.stopPropagation) {
-        e.stopPropagation();
-      } else {
-        window.event.cancelBubble = true;
-      }
     }
-  }
 });

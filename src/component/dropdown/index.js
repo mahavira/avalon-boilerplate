@@ -58,6 +58,11 @@ avalon.component('ms-dropdown', {
       }
       this.open = false;
     },
+  setCurrValueToArray:function(){
+      if (Object.prototype.toString.call(this.currValue) !== '[object Array]')
+        this.currValue = [this.currValue];
+
+  },
     stopPropagation: function (e) {
       if (e && e.stopPropagation) {
         e.stopPropagation();
