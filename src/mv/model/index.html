@@ -9,7 +9,8 @@
       <div class="btn-group btn-group-justified">
         <a type="button" class="btn btn-default" :click="@onNewModel"><i class="glyphicon glyphicon-plus"></i>
           新建</a>
-        <a type="button" class="btn btn-default" :click="@onNewModelBySimilar"><i class="glyphicon glyphicon-th-list"></i> 类似新建</a>
+        <a type="button" class="btn btn-default" :click="@onNewModelBySimilar"><i
+            class="glyphicon glyphicon-th-list"></i> 类似新建</a>
         <a type="button" class="btn btn-default" :click="@onDelete"><i class="glyphicon glyphicon-remove"></i> 删除</a>
       </div>
 
@@ -33,6 +34,6 @@
     </div>
   </div>
 
-    <ms-dialog :widget="@config" :controller="newModel">
+  <ms-dialog :widget="@config" :controller="newModel">
   </ms-dialog>
 </div>
