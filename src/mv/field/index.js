@@ -1,6 +1,7 @@
 /**
  * Created by linmingxiong on 16/9/27.
  */
+import $ from '../../../bower_components/jquery/dist/jquery';
 
 var vm = avalon.define({
   $id: 'field',
@@ -85,7 +86,6 @@ var vm = avalon.define({
     addData:function(){
         vmAddFieldDialog.open();
     }
-    
 });
 
 /*一级弹层，添加字段 vm*/
@@ -156,25 +156,27 @@ var vmAddFieldDialog = avalon.define({
   setRules:function(){
       vmsetRulesDialog.open();
   },
-  validate: {
-        onSuccess: function(reasons, event) {
-            console.info('OK')
-        },
+    validate: {
         onError: function (reasons) {
+            console.log(reasons);
             reasons.forEach(function (reason) {
                 console.log(reason.getMessage())
             })
+            $(this).siblings('span').text(reasons[0].getMessage());
+        },
+        onSuccess:function(){
+            //$(this).siblings('span').text('验证成功');
+            $(this).siblings('span').text('');
         },
         onValidateAll: function (reasons) {
             if (reasons.length) {
                 console.log('有表单没有通过')
             } else {
-                console.log('全部通过');
-                vmAddFieldDialog.submit();
+                console.log('全部通过')
             }
         }
-
     }
+
 });
 /*二级弹层，设置选项列表 vm*/
 var vmsetListDialog = avalon.define({

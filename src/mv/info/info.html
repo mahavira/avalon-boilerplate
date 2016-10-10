@@ -1,44 +1,45 @@
 <div class="" style="margin-top: 20px;"  :controller="info">
 
-  <form class="form-horizontal" role="form" style="max-width: 400px;margin: 0 auto">
+  <form class="form-horizontal" role="form" style="max-width: 400px;margin: 0 auto"  ms-validate="@validate">
     <div class="form-group">
       <label class="col-sm-3 control-label">扩展模型名称：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" ms-duplex="@data.name"/>
+        <input type="text" class="form-control" ms-duplex="@data.name" ms-rules="{required:true,chs:true,maxlength:15}" /><span :css="{color:'red'}"></span>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">代码：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" ms-duplex="@data.code"/>
+        <input type="text" class="form-control" ms-duplex="@data.code"  ms-rules="{pattern: /^[a-z]{1,15}$/i}"
+           data-pattern-message="请输入小于15个字母"    /><span :css="{color:'red'}"></span>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">备注：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" ms-duplex="@data.remark"/>
+        <input type="text" class="form-control" ms-duplex="@data.remark" ms-rules="{norequired:true,maxlength:20}" /><span :css="{color:'red'}"></span>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">类型：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" ms-duplex="@data.type"/>
+        <input type="text" class="form-control" ms-duplex="@data.type"  ms-rules="{norequired:true,chs:true,maxlength:15}" /><span :css="{color:'red'}"></span>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">所属ID：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" ms-duplex="@data.pid"/>
+        <input type="text" class="form-control" ms-duplex="@data.pid" disabled/>
       </div>
     </div>
     <div class="form-group">
       <label class="col-sm-3 control-label">物理表名：</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control" ms-duplex="@data.ptable" disabled/>
+        <input type="text" class="form-control" ms-duplex="@data.ptable" ms-rules="{norequired:true,maxlength:15}" /><span :css="{color:'red'}"></span>
       </div>
     </div>
     <div>
-      <button type="button" class="btn btn-danger btn-big pull-right">保 存</button>
+      <button type="submit"  class="btn btn-danger btn-big pull-right">保 存</button>
     </div>
 
 
