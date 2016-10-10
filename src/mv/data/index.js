@@ -8,7 +8,7 @@ var vm = avalon.define({
   loadingWrapShow:true,
   request: function () {
     avalon.ajax({
-      url: apiPath+'data',
+      url: apiPath+'data/'+this.id,
       success: function (data, textStatus, XHR) {
           vm.loadingWrapShow = false;
           vm.data = data;

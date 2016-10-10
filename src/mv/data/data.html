@@ -22,7 +22,7 @@
   </form>
   <table  class="table table-hover table-bordered" style="margin-top: 20px;">
     <thead>
-    <tr>      
+    <tr>
       <th>序号</th>
       <th><input type="checkbox" ms-duplex-checked="@chkAll" data-duplex-changed="@checkAll"/>全选</th>
       <th>PKValue</th>
@@ -31,7 +31,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ms-for="($index, el) in @data">      
+    <tr ms-for="($index, el) in @data">
       <td>{{$index+1}}</td>
       <td><input type="checkbox" ms-duplex-checked="el.checked" data-duplex-changed="@checkOne"/></td>
       <td>{{el.PKValue}}</td>
@@ -41,5 +41,5 @@
 
     </tbody>
   </table>
-  <xmp ms-widget="{is:'ms-newpager'}"></xmp>
+  <xmp ms-widget="{id:'aXS',is:'ms-newpager'}"></xmp>
 </div>

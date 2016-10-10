@@ -1,0 +1,8 @@
+.notice{
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 300px;
+  z-index: 1;
+  transition: all 0.4s;
+}

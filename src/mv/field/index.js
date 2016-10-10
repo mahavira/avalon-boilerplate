@@ -5,14 +5,16 @@
 var vm = avalon.define({
   $id: 'field',
   data: [],
+  pageConfig:{showPages:5},
   request: function () {
     avalon.ajax({
-      url: apiPath+'field',
+      url: apiPath+'field/'+this.id,
       success: function (data, textStatus, XHR) {
           vm.data = data;
       }
     });
   },
+
   chkAll:false,
   checkAll: function (e) {
         var checked = e.target.checked

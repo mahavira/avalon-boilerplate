@@ -1,0 +1,34 @@
+.datepicker{
+  position: absolute;
+  right: 0;
+  top: 38px;
+  background: #FFF;
+  max-width: 320px;
+  z-index: 1;
+}
+.datepicker .btn-group-justified>.btn-group .btn{
+  border-right-width: 0;
+}
+.datepicker .btn-group-justified>.btn-group:last-of-type .btn{
+  border-right-width: 1px;
+}
+.datepicker .table>tbody>tr>td,
+.datepicker .table>tbody>tr>th,
+.datepicker .table>tfoot>tr>td,
+.datepicker .table>tfoot>tr>th,
+.datepicker .table>thead>tr>td,
+.datepicker .table>thead>tr>th{
+  height: 38px;
+  text-align: center;
+}
+.datepicker .table>tbody>tr>td{
+  cursor: pointer;
+}
+.datepicker .table>tbody>tr>td.today{
+  background: #4cae4c;
+  color: #FFF;
+}
+.datepicker .table>tbody>tr>td.active{
+  background: #d43f3a;
+  color: #FFF;
+}

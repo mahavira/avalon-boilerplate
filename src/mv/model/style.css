@@ -1,0 +1,36 @@
+.list-group-item a {
+  display: block;
+  padding: 5px 0 5px 25px;
+  margin-top: 1px;
+  text-decoration: none;
+}
+
+.modelList .glyphicon {
+  width: 20px;
+}
+
+.list-group-items {
+  display: none;
+  visibility: hidden;
+}
+
+.open {
+  background: #f5f5f5;
+}
+
+.open .list-group-items {
+  display: block;
+  visibility: visible;
+}
+
+.list-group-items a {
+  color: #000;
+  transition: all 0.4s;
+  margin-left: 20px;
+  padding-left: 10px;
+}
+
+.list-group-items a.active {
+  background: #ddd;
+  border-radius: 0;
+}

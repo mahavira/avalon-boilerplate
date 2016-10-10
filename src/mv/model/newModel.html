@@ -1,26 +1,37 @@
 <form class="form-horizontal" role="form">
   <div class="form-group">
     <label class="col-sm-3 control-label">扩展模型名称：</label>
-    <div class="col-sm-9">
+    <div class="col-sm-4">
       <input type="text" class="form-control" ms-duplex="@data.name"/>
+    </div>
+    <div class="col-sm-5">
+      * 富有意义的可读名称
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-3 control-label">代码：</label>
-    <div class="col-sm-9">
+    <div class="col-sm-4">
       <input type="text" class="form-control" ms-duplex="@data.code"/>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="col-sm-3 control-label">备注：</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" ms-duplex="@data.remark"/>
+    <div class="col-sm-5">
+      * 程序逻辑中...
     </div>
   </div>
   <div class="form-group">
     <label class="col-sm-3 control-label">类型：</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" ms-duplex="@data.type"/>
+    <div class="col-sm-4">
+      <wbr ms-widget="[{is:'ms-dropdown'},@typeConfig]"/>
+    </div>
+    <div class="col-sm-5">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-sm-3 control-label">备注：</label>
+    <div class="col-sm-4">
+      <textarea type="text" class="form-control" ms-duplex="@data.remark"/>
+    </div>
+    <div class="col-sm-5">
+      关于此模型的其他说明信息
     </div>
   </div>
 </form>

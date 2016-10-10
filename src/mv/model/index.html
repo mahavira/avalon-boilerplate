@@ -1,4 +1,4 @@
-<div :controller="modelList">
+<div :controller="modelList" class="modelList">
 
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -7,29 +7,32 @@
     <div class="panel-body">
 
       <div class="btn-group btn-group-justified">
-        <a type="button" class="btn btn-default" :click="@openNewModelDialog"><i class="glyphicon glyphicon-plus"></i>
+        <a type="button" class="btn btn-default" :click="@onNewModel"><i class="glyphicon glyphicon-plus"></i>
           新建</a>
-        <a type="button" class="btn btn-default"><i class="glyphicon glyphicon-th-list"></i> 类似新建</a>
-        <a type="button" class="btn btn-default" :click="@newCancelDialog"><i class="glyphicon glyphicon-remove"></i> 删除</a>
+        <a type="button" class="btn btn-default" :click="@onNewModelBySimilar"><i class="glyphicon glyphicon-th-list"></i> 类似新建</a>
+        <a type="button" class="btn btn-default" :click="@onDelete"><i class="glyphicon glyphicon-remove"></i> 删除</a>
       </div>
 
       <div class="input-group" style="margin: 15px 0;">
-        <input type="text" class="form-control" name="text"/>
+        <input type="text" class="form-control" name="text" ms-duplex="@searchText"/>
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">搜索</button>
+              <button class="btn btn-default" type="button" ms-click="@search()">搜索</button>
             </span>
       </div>
       <hr/>
       <div class="list-group">
-        <a :for="el in @data" href="javascript:;" :class="['list-group-item', (el.id==@id && 'active')]"
-           :click="@clickHandle(el)">{{el.name}}</a>
+        <li :for="el in @data" href="javascript:;" :class="['list-group-item',(@pid==el.id && 'open')]">
+          <i :class="['glyphicon', (@pid==el.id ?'glyphicon-folder-open':'glyphicon-folder-close')]"></i>
+          <span :click="@clickHandleCategory(el)">{{el.name}}</span>
+          <div class="list-group-items">
+            <a :for="elem in el.data" href="javascript:;" :class="[(elem.id==@id && 'active')]"
+               :click="@clickHandle(elem)">{{elem.name}}</a>
+          </div>
+        </li>
       </div>
     </div>
   </div>
-  <ms-canceldialog :widget="@cancelDialogConfig">
-    <div class="" slot="content"></div>
-  </ms-canceldialog>
-  <ms-dialog :widget="@config" :controller="newModelDialog">
-  </ms-dialog>
 
+  <ms-dialog :widget="@config" :controller="newModel">
+  </ms-dialog>
 </div>
