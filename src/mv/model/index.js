@@ -1,13 +1,12 @@
 /**
  * Created by linmingxiong on 16/9/27.
  */
-<<<<<<< HEAD
+
 import $ from '../../../bower_components/jquery/dist/jquery';
-=======
+
 require('./style.css');
 var notice = require('../notice');
 var alert = require('../alert');
->>>>>>> 59b1f22eea4c51cdbe7c73b298e58cd6a029b31c
 
 var vm = avalon.define({
   $id: 'modelList',
