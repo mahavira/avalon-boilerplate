@@ -4,11 +4,11 @@
 import $ from '../../../bower_components/jquery/dist/jquery';
 var vm = avalon.define({
   $id: 'info',
-  data: {name:1},
+  data: {},
+  id:0,
   request: function () {
     avalon.ajax({
-      url: apiPath+'info',
-      data:{name:'asd'},
+      url: apiPath+'info/'+this.id,
       success: function (data, textStatus, XHR) {
         vm.data = data;
       }

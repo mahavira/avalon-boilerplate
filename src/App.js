@@ -21,32 +21,14 @@ var vm = avalon.define({
       name: '数据管理'
     }
   },
-  dropdown: {
-    data: [{value: 1, label: 'X'}, {value: 2, label: 'XX'}, {value: 3, label: 'XXX'}],
-    currValue: [1, 3],
-    defaultText: '请选择..',
-    onSelect: function (value) {
-      log(vm.dropdown.currValue)
-    }
-  },
-  dropdown2: {
-    data: [{value: 1, label: 'X'}, {value: 2, label: 'XX'}, {value: 3, label: 'XXX'}],
-    currValue: [1, 3],
-    defaultText: '请选择..',
-    onSelect: function (value) {
-      log(vm.dropdown.currValue)
-    }
-  },
   clickHandle: function (menu) {
     var id = avalon.router.getLastPath().split('/')[2];
     location.hash = "#!/" + menu.path + '/' + id;
-
     this.currPath = menu.path;
   },
   currPath: 'info',
   setCurrPath: function (path) {
-    var pathRoot = path.split('/')[1];
-    this.currPath = pathRoot;
+    this.currPath = path.split('/')[1];
   }
 });
 module.exports = vm;

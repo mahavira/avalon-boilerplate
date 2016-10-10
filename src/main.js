@@ -13,6 +13,8 @@ require('./component/pagination');
 require('./component/spinner');
 require('./component/datepicker');
 
+//filters
+require('./filters/join');
 
 //vm
 var vmApp = require('./App.js');
@@ -20,28 +22,30 @@ var vmModelList = require('./mv/model');
 var mvData = require('./mv/data');
 var mvInfo = require('./mv/info');
 var mvField = require('./mv/field');
+//复用通用vm
+require('./mv/notice');
+require('./mv/alert');
 
 //添加路由规则
 avalon.router.add("/info/:id", function setPath(id) {
   vmApp.setCurrPath(this.path);
   vmModelList.id = id;
+  mvInfo.id = id;
   mvInfo.request();
-  log('---' + this.path);
 });
 avalon.router.add("/field/:id", function setPath(id) {
   vmApp.setCurrPath(this.path);
   vmModelList.id = id;
+  mvField.id = id;
   mvField.request();
-  log('---' + this.path);
 });
 avalon.router.add("/data/:id", function setPath(id) {
   vmApp.setCurrPath(this.path);
   vmModelList.id = id;
+  mvData.id = id;
   mvData.request();
-  log('---' + this.path);
 });
 avalon.router.error(function () {
-  avalon.log('----error');
 });
 
 //启动路由监听
