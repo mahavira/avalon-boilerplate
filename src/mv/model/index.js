@@ -18,7 +18,7 @@ var vm = avalon.define({
       success: function (data) {
         vm.data = data;
         if (!vm.id) {
-          this.setDefaultItem();
+          vm.setDefaultItem();
         }
         vm.setCategoryByItemId(vm.id);
       }
