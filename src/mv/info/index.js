@@ -13,6 +13,28 @@ var vm = avalon.define({
         vm.data = data;
       }
     });
-  }
+  },
+  inputSucess:{
+      name:'success',
+      iconshow:true,
+      lableShow:false,
+      inputParCol:['col-sm-12'],
+      type:'success'
+  },
+  input1:{
+      name:'error',
+      iconshow:true,
+      placeholder:'信息错误',
+      inputType:'password',
+      type:'error'
+  },
+  input2:{
+      isWarn:true,
+      iconshow:true
+  },
+  input3:{
+      name:'密 码',
+      inputType:'password'
+  } 
 });
 module.exports = vm;
