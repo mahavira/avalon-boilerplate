@@ -1,9 +1,16 @@
 <form class="form-horizontal" role="form" ms-validate="@validate">
   <div class="form-group">
+    <div class="form-group">
+      <label class="col-sm-3 control-label"></label>
+      <div class="col-sm-9">
+        <span :css="{color:'red'}" :text="@point" :visible="@show"></span>
+
+      </div>
+    </div>
     <label class="col-sm-3 control-label">扩展模型名称：</label>
 
     <div class="col-sm-4">
-      <input type="text" class="form-control" ms-duplex="@data.name" ms-rules="{required:true,pattern:/^[\u4e00-\u9fa5a-zA-Z]{1,20}$/}" data-pattern-message="输入20字之内的英文或中文" /><span ms-css="{color:'red'}"></span>
+      <input type="text" class="form-control" ms-duplex="@data.name" ms-rules="{required:true,pattern:/^[\u4e00-\u9fa5a-zA-Z]{1,20}$/}" data-pattern-message="输入20字之内的英文或中文" />
     </div>
     <div class="col-sm-5">
       * 富有意义的可读名称
@@ -13,7 +20,7 @@
     <label class="col-sm-3 control-label">代码：</label>
 
     <div class="col-sm-4">
-      <input type="text" class="form-control" ms-duplex="@data.code" ms-rules="{required:true,maxlength:50}" /><span ms-css="{color:'red'}"></span>
+      <input type="text" class="form-control" ms-duplex="@data.code" ms-rules="{required:true,maxlength:50}" />
     </div>
     <div class="col-sm-5">
       * 程序逻辑中...
@@ -31,7 +38,7 @@
     <label class="col-sm-3 control-label">备注：</label>
     <div class="col-sm-4">
       <textarea type="text" class="form-control" ms-duplex="@data.remark" />
-      <span ms-css="{color:'red'}"></span>
+
     </div>
     <div class="col-sm-5">
       关于此模型的其他说明信息

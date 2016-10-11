@@ -1,7 +1,13 @@
 <form class="form-horizontal" role="form" ms-validate="@validate">
     <div class="row">
-        <div class="col-sm-12 clearfix">
+        <div class="form-group">
+            <label class="col-sm-3 control-label"></label>
+            <div class="col-sm-9">
+                <span :css="{color:'red'}" :text="@point" :visible="@show"></span>
 
+            </div>
+        </div>
+        <div class="col-sm-12 clearfix">
             <div class="form-group">
                 <label class="col-sm-3 control-label">PK值信息：</label>
                 <div class="col-sm-9">

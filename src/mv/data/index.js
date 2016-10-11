@@ -3,26 +3,28 @@
  */
 
 var vm = avalon.define({
-  $id: 'data',
-  data: [],
-  loadingWrapShow:true,
-  request: function () {
-    avalon.ajax({
-      url: apiPath+'data/'+this.id,
-      success: function (data, textStatus, XHR) {
-          vm.loadingWrapShow = false;
-          vm.data = data;
-      }
-    });
-  },
-  chkAll:false,
-  checkAll: function (e) {
+    $id: 'data',
+    data: [],
+    point: '',
+    show: false,
+    loadingWrapShow: true,
+    request: function () {
+        avalon.ajax({
+            url: apiPath + 'data/' + this.id,
+            success: function (data, textStatus, XHR) {
+                vm.loadingWrapShow = false;
+                vm.data = data;
+            }
+        });
+    },
+    chkAll: false,
+    checkAll: function (e) {
         var checked = e.target.checked
         vm.data.forEach(function (el) {
             el.checked = checked
         })
     },
-   checkOne: function (e) {
+    checkOne: function (e) {
         var checked = e.target.checked
         if (checked === false) {
             vm.chkAll = false
@@ -32,87 +34,99 @@ var vm = avalon.define({
             })
         }
     },
-    addData:function(e){
+    addData: function (e) {
         vmCreateDataDialog.open();
     },
-    getChecks:function(){
-        var tmpArray = [];        
-        avalon.each(vm.data, function(index, el){
-             if(el.checked === true){
+    getChecks: function () {
+        var tmpArray = [];
+        avalon.each(vm.data, function (index, el) {
+            if (el.checked === true) {
                 tmpArray.push(index);
             }
         })
         return tmpArray;
     },
-    delData:function(){
-        var delArray = vm.getChecks();  
-        if(delArray.length === 0){
+    delData: function () {
+        var delArray = vm.getChecks();
+        if (delArray.length === 0) {
             //若未选中，弹出请选择要删除的数据的对话框
             console.log("请选择要删除的数据");
-            
-        }
-        else{
-            console.log('删除的数据下标为：'+delArray.join(";"));        
-            //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
-            //vm.delRequest(delArray.join(";"));
-        }        
-    },
-    delRequest:function(del){
-        avalon.ajax({
-          url: apiPath+'data'+"/?del="+del,
-          success: function (data, textStatus, XHR) {
-              vm.data = data;
-          }
-        });
-    },
-    editData:function(){        
-        var editArray = vm.getChecks();  
-        if(editArray.length !== 1){
-            //若选项个数不等于1，弹出请选择1条待编辑的数据的 对话框
-            console.log('请选择1条待编辑的数据');  
-            
+
         }
         else {
-            console.log('编辑的数据下标为：'+editArray);     
+            console.log('删除的数据下标为：' + delArray.join(";"));
             //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
             //vm.delRequest(delArray.join(";"));
         }
     },
-    editRequest:function(id){
+    delRequest: function (del) {
         avalon.ajax({
-          url: apiPath+'data'+"/?edit="+id,
-          success: function (data, textStatus, XHR) {
-              vm.data = data;
-          }
+            url: apiPath + 'data' + "/?del=" + del,
+            success: function (data, textStatus, XHR) {
+                vm.data = data;
+            }
         });
     },
-    selectedF:"选项1",
-    selectedS:"选项2",
-    priceOptions:['选项1','选项2','选项3','选项4'],
-    otherOptions:['选项1','选项2','选项3','选项4'],
+    editData: function () {
+        var editArray = vm.getChecks();
+        if (editArray.length !== 1) {
+            //若选项个数不等于1，弹出请选择1条待编辑的数据的 对话框
+            console.log('请选择1条待编辑的数据');
+
+        }
+        else {
+            console.log('编辑的数据下标为：' + editArray);
+            //弹出确定要删除吗？对话框，点击确定则执行vm.delRequest函数，向服务器请求删除操作；取消则关闭对话框。
+            //vm.delRequest(delArray.join(";"));
+        }
+    },
+    editRequest: function (id) {
+        avalon.ajax({
+            url: apiPath + 'data' + "/?edit=" + id,
+            success: function (data, textStatus, XHR) {
+                vm.data = data;
+            }
+        });
+    },
+    selectedF: "选项1",
+    selectedS: "选项2",
+    priceOptions: ['选项1', '选项2', '选项3', '选项4'],
+    otherOptions: ['选项1', '选项2', '选项3', '选项4'],
     validate: {
         onError: function (reasons) {
             //console.log(reasons);
             reasons.forEach(function (reason) {
                 console.log(reason.getMessage())
             })
-            $(this).siblings('span').text(reasons[0].getMessage());
+            vm.point = reasons[0].getMessage();
+            vm.show = true;
         },
-        onSuccess:function(){
-            //$(this).siblings('span').text('验证成功');
-            $(this).siblings('span').text('');
+        onSuccess: function () {
+            //$(this).siblings('span').text('');
+            vm.show = false;
         },
         onValidateAll: function (reasons) {
             if (reasons.length) {
                 console.log('有表单没有通过')
+                vm.point = '有表单没有通过';
+                vm.show = true;
             } else {
-                console.log('全部通过')
+                console.log('全部通过');
+                vm.point = '全部通过';
+                vm.show = true;
+                avalon.ajax({
+                    url: apiPath + 'info/' + this.id,//调用修改的接口
+                    data: vm.data,
+                    success: function (data, textStatus, XHR) {
+                        vm.data = data;
+                    }
+                });
             }
         }
     }
 });
 var vmCreateDataDialog = avalon.define({
-    $id:"createDataDialog",
+    $id: "createDataDialog",
     config: {
         id: 'createData',
         title: '新建数据',
@@ -122,10 +136,10 @@ var vmCreateDataDialog = avalon.define({
             vmCreateDataDialog.submit();
         }
     },
-    dataInfo:{
-        info:"adsfds",
-        price:"",
-        position:""
+    dataInfo: {
+        info: "adsfds",
+        price: "",
+        position: ""
     },
     submit: function () {
         this.hide()
@@ -136,10 +150,10 @@ var vmCreateDataDialog = avalon.define({
     open: function () {
         this.config.show = true;
     },
-    setList:function(){
+    setList: function () {
         vmsetListDialog.open();
     },
-    setRules:function(){
+    setRules: function () {
         vmsetRulesDialog.open();
     }
 });

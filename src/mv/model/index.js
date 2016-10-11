@@ -146,6 +146,8 @@ module.exports = vm;
 var vmNewModel = avalon.define({
   $id: 'newModel',
   data: {},
+  show:false,
+  point:'',
   typeConfig: {
     currValue: 0,
     data: [0, 0, 0, 0, 0],
@@ -158,7 +160,10 @@ var vmNewModel = avalon.define({
     show: false,
     content: require('./newModel.html'),
     ok: function () {
-      vmNewModel.submit();
+      this.validate.onManual();//手动验证
+
+      // vmNewModel.submit();
+      //vmNewModel.validate.onValidateAll();
     }
   },
   submit: function () {
@@ -212,21 +217,32 @@ var vmNewModel = avalon.define({
   },
   validate: {
     onError: function (reasons) {
-      //console.log(reasons);
       reasons.forEach(function (reason) {
         console.log(reason.getMessage())
       })
-      $(this).siblings('span').text(reasons[0].getMessage());
+      vmNewModel.point=reasons[0].getMessage();
+      vmNewModel.show=true;
     },
     onSuccess:function(){
-      //$(this).siblings('span').text('验证成功');
-      $(this).siblings('span').text('');
+      vmNewModel.show=false;
     },
     onValidateAll: function (reasons) {
       if (reasons.length) {
         console.log('有表单没有通过')
+        vmNewModel.point='有表单没有通过';
+        vmNewModel.show=true;
       } else {
-        console.log('全部通过')
+        console.log('全部通过');
+        vmNewModel.point='全部通过';
+        vmNewModel.show=true;
+        vmNewModel.submit();
+        //avalon.ajax({
+        //  url:apiPath+'info/'+this.id,//调用修改的接口
+        //  data:vmNewModel.data,
+        //  success:function(data, textStatus, XHR){
+        //    vmNewModel.data = data;
+        //  }
+        //});
       }
     }
   }

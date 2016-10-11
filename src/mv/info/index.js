@@ -5,6 +5,8 @@ var vm = avalon.define({
   $id: 'info',
   data: {},
   id:0,
+  point:'',
+  show:false,
   request: function () {
     avalon.ajax({
       url: apiPath+'info/'+this.id,
@@ -19,24 +21,29 @@ var vm = avalon.define({
       reasons.forEach(function (reason) {
         console.log(reason.getMessage())
       })
-      $(this).siblings('span').text(reasons[0].getMessage());
+      vm.point=reasons[0].getMessage();
+      vm.show=true;
     },
     onSuccess:function(){
-      //$(this).siblings('span').text('验证成功');
-      $(this).siblings('span').text('');
+      //$(this).siblings('span').text('');
+      vm.show=false;
     },
     onValidateAll: function (reasons) {
       if (reasons.length) {
         console.log('有表单没有通过')
+        vm.point='有表单没有通过';
+        vm.show=true;
       } else {
         console.log('全部通过');
-        //avalon.ajax({
-        //  url:apiPath+'info/'+this.id,//调用修改的接口
-        //  success:function(data, textStatus, XHR){
-        //    vm.data = data;
-        //  }
-        //});
-        $('form').submit();
+        vm.point='全部通过';
+        vm.show=true;
+        avalon.ajax({
+          url:apiPath+'info/'+this.id,//调用修改的接口
+          data:vm.data,
+          success:function(data, textStatus, XHR){
+            vm.data = data;
+          }
+        });
       }
     }
   }
