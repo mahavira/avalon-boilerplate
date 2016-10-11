@@ -4,59 +4,59 @@
  */
 var {filter, pluck} = require('lodash');
 require('./style.css');
+
 avalon.component('ms-dropdown', {
   template: require('./temp.html'),
   defaults: {
     currValue: [],
     defaultText: '请选择',
-    currText: '',
     data: [],
+    map: {value: 'value', label: 'label'},
     open: false,
     disabled: false,
     multiple: false,
     onInit: function () {
-      document.addEventListener('click',function () {
+      document.addEventListener('click', function () {
         this.open = false;
       }.bind(this));
     },
-    onReady: function () {
-      this.setCurrValueToArray();
-      this.setCurrText();
-      log('onReady')
+    currValueToArray: function () {
+      if (Object.prototype.toString.call(this.currValue) !== '[object Array]')
+        this.currValue = [this.currValue];
     },
-    setCurrText: function () {
+    getCurrText: function () {
       var labels = pluck(filter(this.data, function (op) {
         return this.hasValue(op);
-      }.bind(this)), 'label');
+      }.bind(this)), this.map.label);
 
-      this.currText = labels.length ? labels.join(',') : this.defaultText;
+      return labels.length ? labels.join() : this.defaultText;
     },
     hasValue: function (op) {
-        this.setCurrValueToArray()
-      return this.currValue.indexOf(op.value) >= 0;
+      this.currValueToArray();
+      return this.currValue.indexOf(op[this.map.value]) >= 0;
     },
     toggle: function (e) {
       this.open = !this.open;
-      this.stopPropagation(e);
     },
     handleSelect: function (op) {
-        this.setCurrValueToArray()
+      this.currValueToArray();
+      var mapValue = this.map.value;
       if (!this.multiple) {
         if (!this.currValue.length)
-          this.currValue.push(op.value);
+          this.currValue.push(op[mapValue]);
         else
-          this.currValue.splice(0, this.currValue.length, op.value);
+          this.currValue.splice(0, this.currValue.length, op[mapValue]);
       } else {
         if (this.hasValue(op)) {
-          this.currValue.splice(this.currValue.indexOf(op.value), 1);
+          this.currValue.splice(this.currValue.indexOf(op[mapValue]), 1);
         } else {
-          this.currValue.push(op.value);
+          this.currValue.push(op[mapValue]);
         }
       }
-      this.open = false;
-      this.setCurrText();
-      if (Object.prototype.toString.call(this.onSelect) === '[object Function]')
+      if (Object.prototype.toString.call(this.onSelect) === '[object Function]'){
         this.onSelect(this.currValue);
+      }
+      this.open = false;
     },
   setCurrValueToArray:function(){
       if (Object.prototype.toString.call(this.currValue) !== '[object Array]')

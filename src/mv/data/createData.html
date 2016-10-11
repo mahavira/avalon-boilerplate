@@ -1,11 +1,11 @@
-<form class="form-horizontal" role="form">
+<form class="form-horizontal" role="form" ms-validate="@validate">
     <div class="row">
         <div class="col-sm-12 clearfix">
 
             <div class="form-group">
                 <label class="col-sm-3 control-label">PK值信息：</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" ms-duplex="@dataInfo.info"/>
+                    <input type="text" class="form-control" ms-duplex="@dataInfo.info" ms-rules="{required:true,pattern:/^([a-z0-9]){8,36}$/i}" data-pattern-message="请输入8-36个汉子或字母" /><span ms-css="{color:'red'}"></span>
                 </div>
             </div>
 

@@ -5,14 +5,16 @@
 var vm = avalon.define({
   $id: 'field',
   data: [],
+  pageConfig:{showPages:5},
   request: function () {
     avalon.ajax({
-      url: apiPath+'field',
+      url: apiPath+'field/'+this.id,
       success: function (data, textStatus, XHR) {
           vm.data = data;
       }
     });
   },
+
   chkAll:false,
   checkAll: function (e) {
         var checked = e.target.checked
@@ -85,7 +87,6 @@ var vm = avalon.define({
     addData:function(){
         vmAddFieldDialog.open();
     }
-    
 });
 
 /*一级弹层，添加字段 vm*/
@@ -156,25 +157,27 @@ var vmAddFieldDialog = avalon.define({
   setRules:function(){
       vmsetRulesDialog.open();
   },
-  validate: {
-        onSuccess: function(reasons, event) {
-            console.info('OK')
-        },
+    validate: {
         onError: function (reasons) {
+            console.log(reasons);
             reasons.forEach(function (reason) {
                 console.log(reason.getMessage())
             })
+            $(this).siblings('span').text(reasons[0].getMessage());
+        },
+        onSuccess:function(){
+            //$(this).siblings('span').text('验证成功');
+            $(this).siblings('span').text('');
         },
         onValidateAll: function (reasons) {
             if (reasons.length) {
                 console.log('有表单没有通过')
             } else {
-                console.log('全部通过');
-                vmAddFieldDialog.submit();
+                console.log('全部通过')
             }
         }
-
     }
+
 });
 /*二级弹层，设置选项列表 vm*/
 var vmsetListDialog = avalon.define({

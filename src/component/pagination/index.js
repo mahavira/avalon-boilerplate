@@ -37,7 +37,7 @@ avalon.component('ms-newpager', {
                 default:
                     return p
             }
-        }, 
+        },
 
         cbProxy: function (e, p) {
             if (this.$buttons[p] || p === this.currentPage) {
