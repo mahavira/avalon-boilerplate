@@ -8,9 +8,9 @@
             <label class="col-sm-3 control-label">名称：</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" ms-duplex="@basicInfo.name"
-                     ms-rules="{ required: true,maxlength:10 }"
+                     ms-rules="{ required: true,maxlength:15,pattern: /([\u4e00-\u9fa5]{1,15})|([a-z]{1,15})/ }"
                      data-required-message="请输入名称"
-                     data-maxlength-message="密码长度不能大于 10 个字母"/>
+                     data-maxlength-message="输入长度不能大于15个字母"/><span :css="{color:'red'}"></span>
             </div>
           </div>
           
@@ -18,18 +18,18 @@
             <label class="col-sm-3 control-label">代码：</label>
             <div class="col-sm-9">
               <input type="text" class="form-control" ms-duplex="@basicInfo.code"
-                     ms-rules="{ required: true,digits:true ,maxlength:10}"
+                     ms-rules="{ required: true,maxlength:10}"
                      data-required-message="请输入代码"
-                     data-maxlength-message="密码长度不能大于 10 个数字"/>
+                     data-maxlength-message="代码长度不能大于 10 个数字"/><span :css="{color:'red'}"></span>
             </div>
           </div>
           
-          <div class="form-group">
-            <label class="col-sm-3 control-label">字段分组：</label>
-            <div class="col-sm-9">
-              <ms-dropdown ms-widget="@fieldGroup"></ms-dropdown>
-            </div>
-          </div>
+          <!--<div class="form-group">-->
+            <!--<label class="col-sm-3 control-label">字段分组：</label>-->
+            <!--<div class="col-sm-9">-->
+              <!--<ms-dropdown ms-widget="@fieldGroup"></ms-dropdown>-->
+            <!--</div>-->
+          <!--</div>-->
           
           <div class="form-group">
             <label class="col-sm-3 control-label">控件类型：</label>
@@ -56,7 +56,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">默认值：</label>
             <div class="col-sm-9">
-              <input type="text" class="form-control" ms-duplex="@basicInfo.default"/>
+              <input type="text" class="form-control" ms-duplex="@basicInfo.default" ms-rules="{norequired:true,maxlength:10}" /><span :css="{color:'red'}"></span>
             </div>
           </div> 
           
@@ -66,7 +66,7 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">选项列表：</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" ms-duplex="@interfaceAttr.list"/>
+              <input type="text" class="form-control" ms-duplex="@interfaceAttr.list" readonly/>
             </div>
             <button type="button" class="btn btn-default" ms-click="@setList">设置...</button>
           </div> 
@@ -74,11 +74,16 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">校验规则：</label>
             <div class="col-sm-6">
-              <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule"/>
+              <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule" readonly/>
             </div>
             <button type="button" class="btn btn-default" ms-click="@setRules">设置...</button>
-          </div> 
-          
+          </div>
+          <div class="form-group">
+              <label class="col-sm-3 control-label">数据长度：</label>
+              <div class="col-sm-6">
+                  <input type="text" class="form-control" ms-duplex="@interfaceAttr.rule" ms-rules="{required:true,maxlength:50}" /><span ms-css="{color:'red'}"></span>
+              </div>
+          </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">检验条件：</label>
             <div class="col-sm-9">

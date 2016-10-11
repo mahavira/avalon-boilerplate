@@ -1,6 +1,7 @@
 /**
  * Created by linmingxiong on 16/9/27.
  */
+import $ from '../../../bower_components/jquery/dist/jquery';
 
 var vm = avalon.define({
   $id: 'data',
@@ -89,7 +90,27 @@ var vm = avalon.define({
     selectedF:"选项1",
     selectedS:"选项2",
     priceOptions:['选项1','选项2','选项3','选项4'],
-    otherOptions:['选项1','选项2','选项3','选项4']     
+    otherOptions:['选项1','选项2','选项3','选项4'],
+    validate: {
+        onError: function (reasons) {
+            //console.log(reasons);
+            reasons.forEach(function (reason) {
+                console.log(reason.getMessage())
+            })
+            $(this).siblings('span').text(reasons[0].getMessage());
+        },
+        onSuccess:function(){
+            //$(this).siblings('span').text('验证成功');
+            $(this).siblings('span').text('');
+        },
+        onValidateAll: function (reasons) {
+            if (reasons.length) {
+                console.log('有表单没有通过')
+            } else {
+                console.log('全部通过')
+            }
+        }
+    }
 });
 var vmCreateDataDialog = avalon.define({
     $id:"createDataDialog",
@@ -103,7 +124,7 @@ var vmCreateDataDialog = avalon.define({
         }
     },
     dataInfo:{
-        info:"",
+        info:"adsfds",
         price:"",
         position:""
     },
