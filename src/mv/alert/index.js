@@ -1,10 +1,6 @@
 /**
  * Created by linmingxiong on 16/9/28.
  */
-/**
- * 使用方法
-
- */
 require('./style.css');
 var vm = avalon.define({
   $id: 'alert',

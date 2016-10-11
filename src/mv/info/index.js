@@ -1,7 +1,6 @@
 /**
  * Created by linmingxiong on 16/9/27.
  */
-import $ from '../../../bower_components/jquery/dist/jquery';
 var vm = avalon.define({
   $id: 'info',
   data: {},

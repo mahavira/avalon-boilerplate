@@ -2,8 +2,6 @@
  * Created by linmingxiong on 16/9/27.
  */
 
-import $ from '../../../bower_components/jquery/dist/jquery';
-
 require('./style.css');
 var notice = require('../notice');
 var alert = require('../alert');
