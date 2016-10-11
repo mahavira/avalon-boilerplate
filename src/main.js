@@ -12,7 +12,7 @@ require('./component/dropdown');
 require('./component/pagination');
 require('./component/spinner');
 require('./component/datepicker');
-
+require('./component/inputFile');
 
 //vm
 var vmApp = require('./App.js');
