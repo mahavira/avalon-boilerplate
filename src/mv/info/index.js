@@ -30,7 +30,14 @@ var vm = avalon.define({
       if (reasons.length) {
         console.log('有表单没有通过')
       } else {
-        console.log('全部通过')
+        console.log('全部通过');
+        //avalon.ajax({
+        //  url:apiPath+'info/'+this.id,//调用修改的接口
+        //  success:function(data, textStatus, XHR){
+        //    vm.data = data;
+        //  }
+        //});
+        $('form').submit();
       }
     }
   }

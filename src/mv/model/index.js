@@ -2,8 +2,6 @@
  * Created by linmingxiong on 16/9/27.
  */
 
-import $ from '../../../bower_components/jquery/dist/jquery';
-
 require('./style.css');
 var notice = require('../notice');
 var alert = require('../alert');
@@ -21,7 +19,7 @@ var vm = avalon.define({
       success: function (data) {
         vm.data = data;
         if (!vm.id) {
-          this.setDefaultItem();
+          vm.setDefaultItem();
         }
         vm.setCategoryByItemId(vm.id);
       }
