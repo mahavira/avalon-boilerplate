@@ -1,0 +1,7 @@
+<div class="form-group" :class="['has-feedback',@classType()]">
+    <label class="control-label" :class="@lableCol" :css="{display:@lableShow?'block':'none'}" for="inputSuccess3">{{@name}}：</label>
+    <div :class="@inputParCol">
+        <input :attr="{type:@inputType,placeholder:@placeholder}" class="form-control" id="inputSuccess3">
+        <span :class="['glyphicon','form-control-feedback',@iconType()]" :css="{display:@iconshow ? 'block' : 'none'}"></span>
+    </div>
+</div>

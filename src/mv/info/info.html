@@ -46,6 +46,12 @@
         <input type="text" class="form-control" ms-duplex="@data.ptable" ms-rules="{norequired:true,maxlength:15}" />
       </div>
     </div>
+    
+    <ms-inputfile :widget="@inputSucess"></ms-inputfile>
+    <ms-inputfile :widget="@input1"></ms-inputfile>
+    <ms-inputfile :widget="@input2"></ms-inputfile>
+    <ms-inputfile :widget="@input3"></ms-inputfile>
+
     <div>
       <button type="submit"  class="btn btn-danger btn-big pull-right">保 存</button>
     </div>

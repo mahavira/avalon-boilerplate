@@ -3,6 +3,8 @@
  * Created by ff on 2016/9/30.
  */
 require('./style.css');
+
+var $=require('../../../bower_components/jquery/dist/jquery');
 avalon.component('ms-datepicker',{
     template:require('./temp.html'),
     defaults:{
